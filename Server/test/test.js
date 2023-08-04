@@ -53,11 +53,11 @@ describe("Check Users API", () => {
             .end((err, response) => {
                 response.should.have.status(200);
                 response.body.should.be.a("array");
-                response.body[0][0].should.eq(users[0].firstName);
-                response.body[0][1].should.eq(users[0].lastName);
-                response.body[0][2].should.eq(users[0].emailID);
-                response.body[0][3].should.eq(users[0].age);
-                response.body[0][4].should.eq(users[0].country);
+                response.body[0].firstName.should.eq(users[0].firstName);
+                response.body[0].lastName.should.eq(users[0].lastName);
+                response.body[0].emailID.should.eq(users[0].emailID);
+                response.body[0].age.should.eq(users[0].age);
+                response.body[0].country.should.eq(users[0].country);
             done()
             });
         });

@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     this.errorOccured = 0;
     axios.get(this.API_URL)
     .then((response) => {
+      // this.allUsers.push(response.data);
       this.convertDataToUserModel(response.data);
     })
     .catch((error) => {
@@ -41,14 +42,14 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // Convert the received data into UserModel.
+  // // Convert the received data into UserModel.
   convertDataToUserModel(data){
     this.allUsers = data.map(userData => ({
-      firstName: userData[0],
-      lastName: userData[1],
-      emailID: userData[2],
-      age: userData[3],
-      country: userData[4]
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      emailID: userData.emailID,
+      age: userData.age,
+      country: userData.country
     }));
     if(this.allUsers.length == 0) this.allUsers.push(this.user); // Add a row if there is none.
   }
@@ -76,6 +77,7 @@ export class AppComponent implements OnInit {
     })
     .then((response) => {
       this.convertDataToUserModel(response.data);
+      // this.allUsers.push(response.data);
     })
     .catch((error) => {
       if (error.code == 'ERR_NETWORK' || error.code == 'ERR_BAD_RESPONSE') {
@@ -100,6 +102,7 @@ export class AppComponent implements OnInit {
     })
     .then((response) => {
       this.convertDataToUserModel(response.data);
+      // this.allUsers.push(response.data);
     })
     .catch((error) => {
       if (error.code == 'ERR_NETWORK' || error.code == 'ERR_BAD_RESPONSE') {
