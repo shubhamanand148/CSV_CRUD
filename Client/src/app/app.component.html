@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <div class="p-3 mb-2 bg-light text-dark">
+    <div class="container">
+      <!-- <h2 class="h2" style="text-align: center;">User Details</h2> -->
+    </div>
+
+    <div>
+      <h6 *ngIf="errorOccured == 1" class="error">Unable to connect to the Server. Trying again...</h6>
+    </div>
+  
+    <form *ngIf="errorOccured == 0" #f="ngForm">
+      <table class="table table-hover">
+        <thead>
+          <!-- Table header columns -->
+          <!-- <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email ID</th>
+            <th scope="col">Age</th>
+            <th scope="col">Country</th>
+          </tr> -->
+        </thead>
+  
+        <tbody>
+          <!-- User details rows using *ngFor -->
+          <tr *ngFor="let user of allUsers; let i=index">
+
+            <td>
+              <input
+                required="true"
+                #name="ngModel"
+                [(ngModel)]="user.firstName"
+                class="form-control form-group col-md-1"
+                type="text"
+                name="firstName{{i}}"
+                pattern="[a-z A-Z]{2,20}"
+              />
+            </td>
+
+            <td>
+              <input
+                required="true"
+                [(ngModel)]="user.lastName"
+                class="form-control form-group col-md-1"
+                type="text"
+                name="lastName{{i}}"
+              />
+            </td>
+
+            <td>
+              <input
+                required="true"
+                [(ngModel)]="user.emailID"
+                class="form-control form-group col-md-1"
+                type="email"
+                name="emailID{{i}}"
+              />
+            </td>
+
+            <td>
+              <input
+                required="true"
+                [(ngModel)]="user.age"
+                class="form-control form-group col-md-1"
+                type="number"
+                name="age{{i}}"
+              />
+            </td>
+
+            <td>
+              <input
+                required="true"
+                [(ngModel)]="user.country"
+                class="form-control form-group col-md-1"
+                type="text"
+                name="country{{i}}"
+              />
+            </td>
+            <button class="btn btn-danger" (click)="deleteUser(i)">Delete</button>
+            <button class="btn btn-primary" (click)="addRow(i)">Add</button>
+          </tr>
+        </tbody>
+      </table>
+  
+      <div class="container">
+        <button class="btn btn-success" type="submit" (click)="saveUsers()">Save</button>
+      </div>
+    </form>
+  </div>  
+</body>
+
+<footer>
+</footer>
+</html>
