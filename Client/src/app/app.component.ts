@@ -1,23 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import axios from "axios";
 import { UserModel } from '../Models/UserModel';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 
 export class AppComponent implements OnInit {
   user = new UserModel();
   allUsers: UserModel[] = []; //List of users
-  errorOccured: number = 0; // To track error.
-  API_URL: string = "http://localhost:3002/users"
+  errorOccured = 0; // To track error.
+  API_URL = "http://localhost:3002/users"
 
-  constructor() {}
+  constructor(private  location: Location) {}
 
   // Load the CSV data when the website is opened.
   ngOnInit() {
+    this.getUsers();
+  }
+
+  // Fetch all the users
+  getUsers(){
     this.errorOccured = 0;
     axios.get(this.API_URL)
     .then((response) => {
@@ -30,14 +36,14 @@ export class AppComponent implements OnInit {
         this.errorOccured = 1;
         console.log("Error status:", error.response.status);
         console.log("Error data:", error.response.data);
-        this.refreshPage();
       }
       // If the file does not exists. Create a file in backend and refresh the page.
-      else if( error.code == 'ERR_BAD_RESPONSE'){
-        this.refreshPage();
+      else if( error.code == 'ERR_BAD_REQUEST' || "ERR_BAD_RESPONSE"){
+        console.log(error);
+        window.location.reload();
       } else {
         // Something else went wrong
-        console.log("Error is this:", error);
+        console.log("This is Error:", error);
       }
     });
   }

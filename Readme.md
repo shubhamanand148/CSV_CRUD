@@ -16,6 +16,7 @@ This is a MEAN Stack project which does CRUD operation on a CSV file named "user
     3. Run: ng serve
 
 It will read the CSV file and fetch the data saved in CSV file and show on the Webpage.
+If the file is already not created, it will create a new users.csv file.
 
 # The CSV file has 5 columns:
 1. First Name

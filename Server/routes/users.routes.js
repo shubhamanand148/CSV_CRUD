@@ -3,6 +3,7 @@ import cors from "cors";
 import { readCSV } from "../fileHandling/readCSV.js";
 import { writeCSV } from "../fileHandling/writeCSV.js";
 import { deleteUser } from "../fileHandling/deleteUser.js";
+import { STATUS_CODES } from 'http';
 
 const router = express.Router();
 const fileName = "../users.csv";
@@ -25,7 +26,7 @@ router.get('/', (req, res) => {
     // If the file does not exist, create a new file with no data.
     if(error.code == 'ENOENT'){
       writeCSV([], fileName).then(function (){
-        // res.status(200);
+        res.sendStatus(400);
       })
       .catch(function (err) {
         console.log(err);
