@@ -3,7 +3,6 @@ import cors from "cors";
 import { readCSV } from "../fileHandling/readCSV.js";
 import { writeCSV } from "../fileHandling/writeCSV.js";
 import { deleteUser } from "../fileHandling/deleteUser.js";
-import { STATUS_CODES } from 'http';
 
 const router = express.Router();
 const fileName = "../users.csv";
